@@ -1,0 +1,33 @@
+; ==================================
+;  ASGI + UVICORN
+; ==================================
+
+[fcgi-program:asgi]
+
+# Var environment para leer las variables entorno de produccion de nuestro archivo .env ubicado en => /home/django_base_server/django_base/.config/environment/production
+environment=DJANGO_BASE_ENVIRON=production
+
+# TCP socket used by Nginx backend upstream.
+socket=tcp://localhost:8000
+
+# Directory where your site's project files are located
+directory=/home/django_base_server/django_base/
+
+# Each process needs to have a separate socket file, so we use process_num
+# Make sure to update "mysite.asgi" to match your project name
+command=/home/django_base_server/.local/share/virtualenvs/django_base-NpH7pTC-/bin/uvicorn django_base.core.asgi:application --uds='./dj-base.sock' --access-log --proxy-headers
+
+# Number of processes to startup, roughly the number of CPUs you have
+numprocs=4
+
+# Give each process a unique name so they can be told apart
+# process_name=asgid
+process_name=asgi%(process_num)d
+
+# Automatically start and recover processes
+autostart=true
+autorestart=true
+
+# Choose where you want your log to go
+stdout_logfile=/home/django_base_server/django_base/.logs/asgi/asgi.log
+redirect_stderr=true
