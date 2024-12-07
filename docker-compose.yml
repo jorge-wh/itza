@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  db:
+    build: .
+    container_name: mysql_container
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: db_itza
+      MYSQL_USER: ownitza
+      MYSQL_PASSWORD: ownitza1
+      MYSQL_ROOT_PASSWORD: rootpassword
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:

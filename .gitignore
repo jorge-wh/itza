@@ -173,7 +173,3 @@ static/*
 # Ignore all media files
 itza/media/*
 !itza/media/.gitkeep
-
-
-Dockerfile
-docker-compose.yml
