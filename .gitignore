@@ -152,6 +152,7 @@ cython_debug/
 .idea/
 
 
+.config/environment/development/*
 # Ignore all .env files for production
 .config/environment/production/*
 !.config/environment/production/.gitkeep
@@ -172,3 +173,7 @@ static/*
 # Ignore all media files
 itza/media/*
 !itza/media/.gitkeep
+
+
+Dockerfile
+docker-compose.yml
