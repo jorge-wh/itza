@@ -1,0 +1,101 @@
+{% extends "account/base_account.html" %}
+{% load i18n widget_tweaks %}
+
+{% block metatags %}
+    <title>{% trans "Sign In" %} | Music</title>
+{% endblock %}
+
+{% block content %}
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de sesión - MusicApp</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url('https://source.unsplash.com/1600x900/?music') no-repeat center center/cover;
+            color: #fff;
+            text-align: center;
+        }
+        .login-container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #333;
+        }
+        .form-group button {
+            background-color: #1DB954; /* Color de Spotify */
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            color: #fff;
+            width: 100%;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        .form-group button:hover {
+            background-color: #1ed760; /* Color más claro */
+        }
+        .signup-link {
+            margin-top: 10px;
+            display: block;
+            color: #1DB954;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .signup-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+        <div class="login-container">
+        <h2>Bienvenido a MusicApp</h2>
+        <p>Inicia sesión para seguir escuchando tu música favorita.</p>
+        <form method="post" action="{% url 'account_login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username">Nombre de usuario</label>
+                {{ form.login }}
+            </div>
+            <div class="form-group">
+                <label for="id_password">Contraseña</label>
+                {{ form.password }}
+            </div>
+            <div class="form-group">
+                <button type="submit">Iniciar sesión</button>
+            </div>
+            <div class="form-group">
+                <a class="signup-link" href="{% url 'account_signup' %}">¿No tienes cuenta? Regístrate aquí</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
