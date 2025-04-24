@@ -1,8 +1,22 @@
 (function () {
   function createFloatingMenu(options = {}) {
-    const menuItems = options.items || [];
-    const icon = options.icon || "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg";
+    // configuration button
     const position = options.position || "bottom-right";
+    const icon = options.icon || "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg";
+    const backgroundBotton = options.backgroundBotton || "#dcd11d";
+
+    // configuration menu
+    const backgroundMenu = options.backgroundMenu || "#0069ff";
+    const widthMenu = options.widthMenu || "max-content";
+    const heightMenu = options.heightMenu || "max-content";
+
+    // configuration items
+    const menuItems = options.items || [];
+    const itemsFontFamily = options.itemsFontFamily || "sans-serif";
+    const itemsFontSize = options.itemsFontSize || "14px";
+    const itemsColor = options.itemsColor || "#fff";
+
+    // toDo => Custom events
 
     const container = document.createElement("div");
     container.style.position = "fixed";
@@ -24,10 +38,12 @@
     menu.style.right = "-14px";
     menu.style.display = "none";
     menu.style.flexDirection = "column";
-    menu.style.backgroundColor = "#0069ff";
+    menu.style.backgroundColor = backgroundMenu;
     menu.style.borderRadius = "6px";
     menu.style.overflow = "hidden";
     menu.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.3)";
+    menu.style.width = widthMenu;
+    menu.style.height = heightMenu;
 
     menuItems.forEach(item => {
       const btn = document.createElement("button");
@@ -36,10 +52,11 @@
       btn.style.padding = "10px 20px";
       btn.style.border = "none";
       btn.style.background = "inherit";
-      btn.style.color = "#fff";
+      btn.style.color = itemsColor;
       btn.style.textAlign = "left";
       btn.style.cursor = "pointer";
-      btn.style.fontSize = "14px";
+      btn.style.fontSize = itemsFontSize;
+      btn.style.fontFamily = itemsFontFamily;
       btn.style.borderBottom = "1px solid rgba(255,255,255,0.2)";
 
       btn.addEventListener("click", () => {
@@ -54,7 +71,6 @@
         btn.style.borderBottomColor = "transparent";
       });
 
-
       menu.appendChild(btn);
     });
 
@@ -62,7 +78,7 @@
     fab.style.width = "60px";
     fab.style.height = "60px";
     fab.style.borderRadius = "50%";
-    fab.style.backgroundColor = "#25D366";
+    fab.style.backgroundColor = backgroundBotton;
     fab.style.display = "flex";
     fab.style.alignItems = "center";
     fab.style.justifyContent = "center";
