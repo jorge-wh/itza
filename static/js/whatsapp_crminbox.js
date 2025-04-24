@@ -3,7 +3,7 @@
     // configuration button
     const position = options.position || "bottom-right";
     const icon = options.icon || "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg";
-    const backgroundBotton = options.backgroundBotton || "#dcd11d";
+    const backgroundBotton = options.backgroundBotton || "#25D366";
 
     // configuration menu
     const backgroundMenu = options.backgroundMenu || "#0069ff";
