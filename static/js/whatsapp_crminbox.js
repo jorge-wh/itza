@@ -14,9 +14,7 @@
     const menuItems = options.items || [];
     const itemsFontFamily = options.itemsFontFamily || "sans-serif";
     const itemsFontSize = options.itemsFontSize || "14px";
-    const itemsColor = options.itemsColor || "#fff";
-
-    // toDo => Custom events
+    const itemsFontColor = options.itemsFontColor || "#fff";
 
     const container = document.createElement("div");
     container.style.position = "fixed";
@@ -24,18 +22,20 @@
     container.style.width = "60px";
     container.style.height = "60px";
 
+    const menu = document.createElement("div");
+
     if (position === "bottom-right") {
       container.style.bottom = "20px";
       container.style.right = "40px";
+      menu.style.right = "0px";
     } else if (position === "bottom-left") {
       container.style.bottom = "20px";
       container.style.left = "40px";
+      menu.style.left = "0px";
     }
 
-    const menu = document.createElement("div");
     menu.style.position = "absolute";
     menu.style.bottom = "70px"; // separarlo del botón
-    menu.style.right = "-14px";
     menu.style.display = "none";
     menu.style.flexDirection = "column";
     menu.style.backgroundColor = backgroundMenu;
@@ -47,29 +47,27 @@
 
     menuItems.forEach(item => {
       const btn = document.createElement("button");
+
+      // configuration events
+      if (item.events) {
+        for (const [eventName, handler] of Object.entries(item.events)) {
+          if (typeof handler === "function") {
+            btn.addEventListener(eventName, (e) => handler(e, btn));
+          }
+        }
+      }
+
       btn.innerText = item.text;
       btn.className = "optionChat";
       btn.style.padding = "10px 20px";
       btn.style.border = "none";
       btn.style.background = "inherit";
-      btn.style.color = itemsColor;
+      btn.style.color = itemsFontColor;
       btn.style.textAlign = "left";
       btn.style.cursor = "pointer";
       btn.style.fontSize = itemsFontSize;
       btn.style.fontFamily = itemsFontFamily;
       btn.style.borderBottom = "1px solid rgba(255,255,255,0.2)";
-
-      btn.addEventListener("click", () => {
-        if (item.url) window.open(item.url, "_blank");
-      });
-
-      btn.addEventListener("mouseenter", () => {
-        btn.style.borderBottomColor = "white";
-      });
-
-      btn.addEventListener("mouseleave", () => {
-        btn.style.borderBottomColor = "transparent";
-      });
 
       menu.appendChild(btn);
     });
